@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1> <strong> <i>2024</i> Student List</strong> </h1>
+<a href="{% url 'add' %}">Add a Student</a>
+
+<ul>
+    {% for student in students %}
+        <li> <strong> {{ student.first_name }} {{ student.last_name }} </strong> <br>
+        <i>{{ student.email }}</i> <br>
+        <p> {{ student.description }}</p> <br>
+
+            {% if student.image %}
+{#                Displaying the student's image#}
+                <img src="{{ student.image.url }}" alt="{{ student.first_name }}'s image" width="100">
+            {% else %}
+                <p>No student's image displayed</p>
+            {% endif %}
+            <br> <br>
+            <a href="{% url 'update' student.id %}">Update</a> <br>
+            <a href="{% url 'delete' student.id %}">Delete</a>
+        </li>
+
+    {% endfor %}
+</ul>
+
+</body>
+</html>
